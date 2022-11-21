@@ -6,23 +6,18 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
-  @Get("/else")
-  getSomethingElse(): string {
-    return this.appService.getSomethingElse();
-  }
-
-  @Get("/last-block")
+  @Get("last-block")
   getBlock(): any {
     return this.appService.getBlock();
   }
 
-  @Get("/block/:hash")
+  @Get("block/:hash")
   getLastBlock(@Param('hash') hash: string): Promise<ethers.providers.Block> {
     return this.appService.getBlock(hash);
+  }
+
+  @Get("total-supply/:address")
+   getTotalSupply(@Param('address') address: string): Promise<number> {
+    return this.appService.getTotalSupply(address);
   }
 }
